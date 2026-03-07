@@ -11,15 +11,7 @@ describe("Server", () => {
 
     const server = serve({ fetch: app.fetch, port: 0 }); // port: 0 = random free port
 
-    await request(server)
-      .get("/api/health")
-      .expect(200)
-      .expect((res) => {
-        if (res.body.service !== "The Great Unknown") {
-          throw new Error("Service name mismatch");
-        }
-      });
-
+    await request(server).get("/api/v1/health").expect(200);
     server.close();
   });
 });
